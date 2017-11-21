@@ -59,6 +59,7 @@ function! virtualenv#activate(...)
 
     let g:virtualenv_name = name
     let $VIRTUAL_ENV = env_dir
+    let $LD_LIBRARY_PATH = env_dir.'/lib'
 
     if exists("*airline#extensions#virtualenv#update")
            call airline#extensions#virtualenv#update()
@@ -76,6 +77,7 @@ function! virtualenv#deactivate()
     unlet! g:virtualenv_name
 
     let $VIRTUAL_ENV = '' " can't delete parent variables
+    let $LD_LIBRARY_PATH = '' " can't delete parent variables
 
     if exists('s:prev_path')
         let $PATH = s:prev_path
