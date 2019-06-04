@@ -43,6 +43,8 @@ function! virtualenv#activate(...)
     let g:deoplete#sources#jedi#python_path = env_dir.'/bin/python'
     let g:ale_python_flake8_executable = env_dir.'/bin/flake8'
     let g:ale_python_pylint_executable = env_dir.'/bin/pylint'
+    let g:ale_python_pylint_executable = env_dir.'/bin/pyls'
+    let g:ale_python_pylint_executable = env_dir.'/bin/black'
 
     let bin = env_dir.(has('win32')? '/Scripts': '/bin')
     call virtualenv#deactivate()
