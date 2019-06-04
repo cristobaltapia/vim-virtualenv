@@ -39,6 +39,11 @@ function! virtualenv#activate(...)
         return
     endif
 
+    " Redefines the python version used for jedi
+    let g:deoplete#sources#jedi#python_path = env_dir.'/bin/python'
+    let g:ale_python_flake8_executable = env_dir.'/bin/flake8'
+    let g:ale_python_pylint_executable = env_dir.'/bin/pylint'
+
     let bin = env_dir.(has('win32')? '/Scripts': '/bin')
     call virtualenv#deactivate()
 
@@ -82,6 +87,8 @@ function! virtualenv#deactivate()
     if exists('s:prev_path')
         let $PATH = s:prev_path
     endif
+
+    " let g:deoplete#sources#jedi#python_path = $HOME.'/.virtualenvs/py3neovim/bin/python3'
 
     if exists("*airline#extensions#virtualenv#update")
            call airline#extensions#virtualenv#update()
